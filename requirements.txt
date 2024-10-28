@@ -1,4 +1,0 @@
-xgboost
-scikit-learn
-pandas
-numpy

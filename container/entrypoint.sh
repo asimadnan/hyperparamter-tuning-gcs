@@ -1,9 +1,10 @@
 #!/bin/bash
+MODE=${1:-predict}
 
-if [ "$1" == "train" ]; then
+if [ "$MODE" == "train" ]; then
     shift
     exec python train.py "$@"
-elif [ "$1" == "predict" ]; then
+elif [ "$MODE" == "predict" ]; then
     shift
     exec python predict.py "$@"
 else

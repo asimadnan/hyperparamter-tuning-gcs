@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: xgboost-train-8
+spec:
+  template:
+    spec:
+      serviceAccountName: my-service-account
+      containers:
+      - name: xgboost
+        image: australia-southeast1-docker.pkg.dev/boston-house-price-439411/my-xgboost-repo/xgboost-train  
+        command: ["python", "train.py"]
+        args: [
+          "--n_estimators", "100",
+          "--max_depth", "3",
+          "--learning_rate", "0.05",
+          "--subsample", "0.8",
+          "--job_name", "xgboost-train-8"
+        ]
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secrets/gcp-key/key.json
+        volumeMounts:
+        - name: gcp-key-volume
+          mountPath: /secrets/gcp-key
+          readOnly: true
+      volumes:
+      - name: gcp-key-volume
+        secret:
+          secretName: gcp-key
+      restartPolicy: Never
+  backoffLimit: 4
