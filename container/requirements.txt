@@ -1,0 +1,7 @@
+xgboost
+scikit-learn
+pandas
+numpy
+wandb
+joblib
+google-cloud-storage

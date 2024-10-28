@@ -1,0 +1,17 @@
+FROM python:3.8-slim
+
+# Install dependencies
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the training script
+COPY train.py .
+COPY predict.py .
+COPY entrypoint.sh .
+
+# Ensure the entrypoint script is executable
+RUN chmod +x entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
