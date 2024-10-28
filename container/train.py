@@ -59,7 +59,8 @@ def load_data():
 
 def main():
     args = parse_args()
-    wandb.login(key="03eabd9a63c1de13c377b2a9e2a54c502ebe0035")
+    #get from en
+    wandb.login(key="xxxx")
 
     # Initialize Weights & Biases logging
     wandb.init(
